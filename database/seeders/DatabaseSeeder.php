@@ -16,24 +16,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $users = \App\Models\User::factory(10)->create();
-        $courses = \App\Models\Course::factory(20)->create();
+        $users = \App\Models\User::factory(20)->create();
+        $courses = \App\Models\Course::factory(35)->create();
 
         $lessons = \App\Models\Lesson::factory(130)->create();
 
-        DB::table('roles')->insert([
-            'name' => 'admin',
-        ]);
-        DB::table('roles')->insert([
-            'name' => 'teacher',
-        ]);
-        DB::table('roles')->insert([
-            'name' => 'user',
-        ]);
-
         foreach ($users as $user){
             $user->courses()->attach($courses->random(3)->pluck('id'));
-            $user->roles()->attach(Role::all()->random(1)->pluck('id'));
         }
     }
 }
