@@ -21,7 +21,18 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'surname' ,
+        'birth_day',
+        'gender' ,
     ];
+    public function courses(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Course::class);
+    }
+    public function roles(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Role::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
