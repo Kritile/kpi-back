@@ -31,7 +31,7 @@ class CoursesScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Courses Screen';
+        return 'Курсы';
     }
 
     /**
@@ -41,7 +41,11 @@ class CoursesScreen extends Screen
      */
     public function commandBar(): iterable
     {
-        return [];
+        return [
+            Link::make(__('Add'))
+                ->icon('plus')
+                ->route('platform.systems.users.create'),
+        ];
     }
 
     /**

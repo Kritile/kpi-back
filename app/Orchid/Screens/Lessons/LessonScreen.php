@@ -34,7 +34,7 @@ class LessonScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'LessonScreen';
+        return 'Уроки';
     }
 
     /**
