@@ -4,6 +4,8 @@ namespace App\Orchid\Screens\Courses;
 
 use App\Models\Course;
 
+use Orchid\Screen\Actions\DropDown;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 use Orchid\Screen\TD;
 use Orchid\Support\Facades\Layout;
@@ -56,6 +58,24 @@ class CoursesScreen extends Screen
                     ->width(450)
                     ->render(function ($lesson){
                         return iconv_substr ($lesson->description, 0 , 80 , 'UTF-8' ).'...';
+                    }),
+                TD::make(__('Actions'))
+                    ->align(TD::ALIGN_CENTER)
+                    ->width('100px')
+                    ->render(function ($lesson) {
+                        return DropDown::make()
+                            ->icon('options-vertical')
+                            ->list([
+
+                                Link::make(__('Edit'))
+                                    ->route('platform.systems.lessons_edit',$lesson)
+                                    ->icon('pencil'),
+                                Link::make(__('Delete'))
+                                    ->route('platform.systems.lessons_delete', $lesson)
+                                    ->icon('trash'),
+
+
+                            ]);
                     }),
 
             ])
