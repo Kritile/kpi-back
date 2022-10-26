@@ -2,15 +2,9 @@
 
 declare(strict_types=1);
 
-use App\Orchid\Screens\Examples\ExampleCardsScreen;
-use App\Orchid\Screens\Examples\ExampleChartsScreen;
-use App\Orchid\Screens\Examples\ExampleFieldsAdvancedScreen;
-use App\Orchid\Screens\Examples\ExampleFieldsScreen;
-use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
-use App\Orchid\Screens\Examples\ExampleScreen;
-use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
+use App\Orchid\Screens\Lessons\LessonScreen;
 use App\Orchid\Screens\PlatformScreen;
-use App\Orchid\Screens\ProjectScreen;
+use App\Orchid\Screens\Courses\CoursesScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
@@ -96,5 +90,17 @@ Route::screen('roles', RoleListScreen::class)
             ->parent('platform.index')
             ->push(__('Roles'), route('platform.systems.roles'));
     });
-Route::screen('projects', ProjectScreen::class)->name('platform.systems.projects');
+
+//Projects
+Route::screen('projects', CoursesScreen::class)->name('platform.systems.courses');
+
+
+
+//Lessons
+Route::screen('lessons', LessonScreen::class)->name('platform.systems.lessons');
+Route::screen('lessons/edit', LessonScreen::class)->name('platform.systems.lessons_edit');
+Route::screen('lessons/delete', LessonScreen::class)->name('platform.systems.lessons_delete');
+Route::screen('lessons/create', LessonScreen::class)->name('platform.systems.lessons_create');
+
+
 //Route::screen('idea', Idea::class, 'platform.screens.idea');
