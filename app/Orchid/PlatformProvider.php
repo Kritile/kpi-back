@@ -28,6 +28,15 @@ class PlatformProvider extends OrchidServiceProvider
     public function registerMainMenu(): array
     {
         return [
+            Menu::make('О нас')
+                ->icon('feed')
+                ->route('platform.systems.about_edit')
+                ->permission('platform.systems.courses'),
+
+            Menu::make('Контакты')
+                ->icon('doc')
+                ->route('platform.systems.contacts_edit')
+                ->permission('platform.systems.courses'),
             Menu::make('Курсы')
                 ->icon('notebook')
                 ->route('platform.systems.courses')
@@ -38,6 +47,7 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('task')
                 ->route('platform.systems.lessons')
                 ->permission('platform.systems.courses'),
+
             Menu::make(__('Пользователи'))
                 ->icon('user')
                 ->route('platform.systems.users')

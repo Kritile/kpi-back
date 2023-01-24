@@ -16,6 +16,9 @@ class Course extends Model
     protected $fillable = [
         'name',
         'description',
+        'teacher_id',
+        'image',
+        'fullText'
     ];
     public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {

@@ -23,7 +23,7 @@ class LessonScreen extends Screen
     public function query(): iterable
     {
         return [
-            'lessons' => Lesson::filters()->defaultSort('course_id','desc')->paginate(10),
+            'lessons' => Lesson::filters()->defaultSort('created_at','desc')->paginate(10),
         ];
     }
 
@@ -47,7 +47,7 @@ class LessonScreen extends Screen
         return [
             Link::make(__('Add'))
                 ->icon('plus')
-                ->route('platform.systems.users.create'),
+                ->route('platform.systems.lessons_edit'),
         ];
     }
 
@@ -66,7 +66,7 @@ class LessonScreen extends Screen
                     ->render(function ($lesson){
                         return iconv_substr ($lesson->description, 0 , 80 , 'UTF-8' ).'...';
                     }),
-                TD::make('video_url', 'Видео')
+                TD::make('video_url', 'Картинка')
                     ->render(function ($lesson){
                         return '<span class="thumb-lg me-sm-0 ms-md-0 me-xl-0 d-none d-md-inline-block">
                                     <img src="'.$lesson->video_url.'" class="bg-light">
@@ -89,8 +89,8 @@ class LessonScreen extends Screen
                                 Link::make(__('Edit'))
                                     ->route('platform.systems.lessons_edit',$lesson)
                                     ->icon('pencil'),
-                                Link::make(__('Delete'))
-                                    ->route('platform.systems.lessons_delete', $lesson)
+                                Button::make(__('Delete'))
+                                    ->method('removeLesson')
                                     ->icon('trash'),
 
 
@@ -103,5 +103,8 @@ class LessonScreen extends Screen
     private function getCourseName($course_id)
     {
         return Course::find($course_id)->name;
+    }
+    private function removeLesson(){
+
     }
 }

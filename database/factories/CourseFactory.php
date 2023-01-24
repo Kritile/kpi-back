@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,6 +20,9 @@ class CourseFactory extends Factory
         return [
             'name'=>fake()->text(20),
             'description'=>fake()->text(350),
+            'teacher_id'=>User::all()->random()->id,
+            'image' => fake()->imageUrl('1440','500','cats'),
+            'fullText' => fake()->text(1200),
         ];
     }
 }
