@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Orchid\Screens\Courses\EditCourse;
 use App\Orchid\Screens\Lessons\LessonScreen;
 use App\Orchid\Screens\Lessons\LessonEdit;
 use App\Orchid\Screens\PlatformScreen;
@@ -96,6 +97,7 @@ Route::screen('roles', RoleListScreen::class)
 
 //Projects
 Route::screen('projects', CoursesScreen::class)->name('platform.systems.courses');
+Route::screen('projects/edit/{course?}', EditCourse::class)->name('platform.systems.courses.edit');
 
 
 
@@ -107,4 +109,5 @@ Route::screen('lessons/delete', LessonScreen::class)->name('platform.systems.les
 Route::screen('about', AboutScreen::class)->name('platform.systems.about_edit');
 //Contacts
 Route::screen('contacts', ContactsScreen::class)->name('platform.systems.contacts_edit');
+
 //Route::screen('idea', Idea::class, 'platform.screens.idea');

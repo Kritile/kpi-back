@@ -2,47 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\LessonCollection;
-use App\Models\Lesson;
+use App\Facades\LessonServiceFacade;
+use App\Services\LessonService;
 use Illuminate\Http\Request;
 
 class LessonController extends Controller
 {
-    public function getLessonsList(Request $request,$course_id){
-        return new LessonCollection(Lesson::where('course_id' ,'=',$course_id)->get());
+    public function getLessonsList($course_id){
+        return LessonServiceFacade::getLessonsByCourseId($course_id);
+
     }
 
-    public function createLesson(Request $request){
+    public function createLesson(Request $request, $course_id){
         $data = $request->validate([
             'name' => ['required'],
             'imageUrl' => [],
             'fullText' => [],
-            'courseId' => ['required'],
-            'lessonId' => []
         ]);
-        $lesson = isset($data['lessonId']) && $data['lessonId'] ?
-            Lesson::where('id', '=', $data['lessonId'])->first() :
-            new Lesson();
-
-        $lesson->description = $data['fullText'];
-        $lesson->name = $data['name'];
-        $lesson->video_url = $data['imageUrl'];
-        $lesson->course_id = $data['courseId'];
-        $lesson->save();
-        return ['status'=> 'ok'];
-
+        return LessonServiceFacade::createLesson($data,$course_id);
     }
 
-    public function removeLesson(Request $request){
+    public function editLesson(Request $request, $course_id){
         $data = $request->validate([
-            'id' => ['required'],
+            'name' => ['required'],
+            'imageUrl' => [],
+            'fullText' => [],
+            'lessonId' => ['required']
+
         ]);
-        $lesson = Lesson::where('id', '=', $data['id']);
-        if($lesson){
-            $lesson->delete();
-            return ['status'=> 'ok'];
-        }else{
-            return ['status' => 'lesson_not_found'];
-        }
+       return LessonServiceFacade::editLesson($data,$course_id);
+    }
+
+    public function removeLesson($id){
+        return LessonServiceFacade::deleteLesson($id);
     }
 }

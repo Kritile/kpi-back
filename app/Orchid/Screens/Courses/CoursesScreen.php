@@ -72,7 +72,7 @@ class CoursesScreen extends Screen
                             ->list([
 
                                 Link::make(__('Edit'))
-                                    ->route('platform.systems.lessons_edit',$lesson)
+                                    ->route('platform.systems.courses.edit',$lesson)
                                     ->icon('pencil'),
                                 Link::make(__('Delete'))
                                     ->route('platform.systems.lessons_delete', $lesson)

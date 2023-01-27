@@ -2,39 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\CourseCollection;
-use App\Http\Resources\CourseResource;
-use App\Models\Course;
+use App\Facades\CourseServiceFacade;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+
 
 class CourseController extends Controller
 {
-    public function getAllCourse(Request $request, $page)
+    public function getAllCourse($page)
     {
+        return CourseServiceFacade::getAllCourses($page);
 
-        return new CourseCollection(Course::orderBy('created_at','desc')->paginate('9',['*'],'',$page));
     }
-    public function getCourse(Request $request,$id)
+    public function getCourse($id)
     {
-        return new CourseResource(Course::find($id));
+       return CourseServiceFacade::getCourse($id);
     }
 
     public function createCourse(Request $request){
         $data = $request->validate([
             'name' => ['required'],
-            'imageUrl' => ['required'],
-            'desc' => ['required'],
+            'image' => ['required'],
+            'description' => ['required'],
             'fullText' => [],
+            'teacher_id' => []
         ]);
-        $course = new Course();
-        $course->name = $data['name'];
-        $course->image = $data['imageUrl'];
-        $course->description = $data['desc'];
-        $course->teacher_id = auth('sanctum')->id();
-        $course->fullText = $data['fullText'];
-        $course->save();
-        return ['status'=> 'ok'];
+        return CourseServiceFacade::createCourse($data);
     }
 
 }

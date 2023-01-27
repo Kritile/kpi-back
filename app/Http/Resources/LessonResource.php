@@ -19,6 +19,7 @@ class LessonResource extends JsonResource
 
         $courseCreator = $course->teacher_id;
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
             'video_url' => $this->video_url,

@@ -19,21 +19,25 @@ use \App\Models\Contacts;
 |
 */
 //user
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::controller(UserController::class)->prefix('/user')->group(function () {
+    Route::middleware('auth:sanctum')->get('/', function (Request $request) {
+        return $request->user();
+    });
+    Route::post('/create', 'register');
+    Route::post('/login', 'login');
+    Route::get('/check', 'checkAuth');
 });
-Route::get('/user-check', [UserController::class, 'checkAuth']);
-Route::post('/create-user',[UserController::class,'login']);
-Route::post('/register-user',[UserController::class,'register']);
-Route::post('/login-user',[UserController::class,'login']);
+
 //courses
-Route::get('/courses/{page}', [CourseController::class,'getAllCourse']);
-Route::get('/course/{id}', [CourseController::class,'getCourse']);
-Route::middleware('auth:sanctum')->post('/create-course', [CourseController::class,'createCourse']);
-//lessons
-Route::get('/lessons/{course_id}', [LessonController::class,'getLessonsList']);
-Route::middleware('auth:sanctum')->post('/create-lesson', [LessonController::class,'createLesson']);
-Route::middleware('auth:sanctum')->post('/remove-lesson', [LessonController::class,'removeLesson']);
+Route::prefix('/courses')->group(function () {
+    Route::get('page/{page}', [CourseController::class,'getAllCourse']);
+    Route::get('/{id}', [CourseController::class,'getCourse']);
+    Route::middleware('auth:sanctum')->post('/create',[CourseController::class,'createCourse']);
+    Route::get('/{course_id}/lessons/', [LessonController::class,'getLessonsList']);
+    Route::middleware('auth:sanctum')->post('/{course_id}/lessons', [LessonController::class,'createLesson']);
+    Route::middleware('auth:sanctum')->put('/{course_id}/lessons', [LessonController::class,'editLesson']);
+    Route::middleware('auth:sanctum')->delete('/lesson/{id}', [LessonController::class,'removeLesson']);
+});
 //pages
 Route::get('/about', function (){
     return About::first();
