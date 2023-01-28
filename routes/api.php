@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LessonController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -39,9 +40,6 @@ Route::prefix('/courses')->group(function () {
     Route::middleware('auth:sanctum')->delete('/lesson/{id}', [LessonController::class,'removeLesson']);
 });
 //pages
-Route::get('/about', function (){
-    return About::first();
-});
-Route::get('/contacts', function (){
-    return Contacts::first();
-});
+
+Route::get('/about', [PageController::class,'getAbout']);
+Route::get('/contacts', [PageController::class,'getContacts']);

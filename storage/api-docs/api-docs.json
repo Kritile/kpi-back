@@ -1,0 +1,393 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Course site api",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/courses/page/{page}": {
+            "get": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Get course list",
+                "operationId": "1366cefc631cbacbab646972362b8697",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Course list"
+                    }
+                }
+            }
+        },
+        "/api/courses/{id}": {
+            "get": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Get course by id",
+                "operationId": "6063ea4df4734a0b7050114af212eb7c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "example": "4"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Course"
+                    }
+                }
+            }
+        },
+        "/api/courses/create": {
+            "post": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Create course",
+                "operationId": "87df1716815002235de5b10b93600ae5",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Name"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "example": "http://placekitten.com/g/200/300"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "password"
+                                    },
+                                    "fullText": {
+                                        "type": "string",
+                                        "example": "password"
+                                    },
+                                    "teacher_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "status"
+                    },
+                    "401": {
+                        "description": "unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/courses/{course_id}/lessons": {
+            "get": {
+                "tags": [
+                    "Lesson"
+                ],
+                "summary": "Get lessons by course id",
+                "operationId": "5995aa654833cd07d905e78420bcb508",
+                "parameters": [
+                    {
+                        "name": "course_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "example": "4"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "status"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Lesson"
+                ],
+                "summary": "Edit lesson course",
+                "operationId": "bcc08dddcee313946506696be80c9c0b",
+                "parameters": [
+                    {
+                        "name": "course_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "example": "4"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Name"
+                                    },
+                                    "imageUrl": {
+                                        "type": "string",
+                                        "example": "http://placekitten.com/g/200/300"
+                                    },
+                                    "fullText": {
+                                        "type": "string",
+                                        "example": "password"
+                                    },
+                                    "lessonId": {
+                                        "type": "number",
+                                        "example": "2"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "status"
+                    },
+                    "401": {
+                        "description": "unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Create course",
+                "operationId": "6a148866d890b2cc93c734fe3f13a1f6",
+                "parameters": [
+                    {
+                        "name": "course_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "example": "4"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Name"
+                                    },
+                                    "imageUrl": {
+                                        "type": "string",
+                                        "example": "http://placekitten.com/g/200/300"
+                                    },
+                                    "fullText": {
+                                        "type": "string",
+                                        "example": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "status"
+                    },
+                    "401": {
+                        "description": "unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/courses/lesson/{id}": {
+            "delete": {
+                "tags": [
+                    "Lesson"
+                ],
+                "summary": "Delete lesson",
+                "operationId": "8fa1756f2511916301f91a89d7ad522f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "example": "4"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "status"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/about": {
+            "get": {
+                "tags": [
+                    "Pages"
+                ],
+                "summary": "Get about page content",
+                "operationId": "8b836d6022dd5d1bd5507ab14cba6d60",
+                "responses": {
+                    "200": {
+                        "description": "Course list"
+                    }
+                }
+            }
+        },
+        "/api/contacts": {
+            "get": {
+                "tags": [
+                    "Pages"
+                ],
+                "summary": "Get contacts page content",
+                "operationId": "f624142b158ea20c2cbae937e6d498ee",
+                "responses": {
+                    "200": {
+                        "description": "Course list"
+                    }
+                }
+            }
+        },
+        "/api/user/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Authorize user",
+                "operationId": "9f6f4aca790a5229fb638e798623c6e0",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "admin@admin.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User token"
+                    }
+                }
+            }
+        },
+        "/api/user/create": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Create new user",
+                "operationId": "794188db34be7d18b3bc4aecf30d59ab",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Name"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "test@test.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User token"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "name": "bearerAuth",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
