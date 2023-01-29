@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Http\Resources\LessonCollection;
+use App\Models\Course;
 use App\Models\Lesson;
 
 class LessonService
@@ -18,14 +19,22 @@ class LessonService
     /**
      * @param \Request $request
      * @param $course_id
-     * @return string[]
+     * @return string[] | \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function createLesson($data, $course_id){
-        $lesson = new Lesson();
-        $lesson->fill($data);
-        $lesson->course_id = $course_id;
-        $lesson->save();
-        return ['status'=> 'ok'];
+        $course = Course::find($course_id);
+        if($course){
+            $lesson = new Lesson();
+            $lesson->fill($data);
+            $lesson->course_id = $course_id;
+            $lesson->save();
+            $course->lessons()->save($lesson);
+            return ['status'=> 'ok', 'id'=>$lesson->id];
+        }else{
+           return response('Course not found',404);
+        }
+
+
     }
 
     /**
@@ -39,7 +48,7 @@ class LessonService
         $lesson->fill($data);
         $lesson->course_id = $course_id;
         $lesson->save();
-        return ['status'=> 'ok'];
+        return ['status'=> 'ok', 'id'=> $lesson->id];
     }
 
     /**

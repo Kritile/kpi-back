@@ -13,7 +13,8 @@ class CourseService
      * @return CourseCollection
      */
     public function getAllCourses($page){
-        return new CourseCollection(Course::orderBy('created_at','desc')->paginate('9',['*'],'',$page));
+        $course_list = new CourseCollection(Course::orderBy('created_at','desc')->paginate('9',['*'],'',$page));
+        return $course_list;
     }
 
     /**
@@ -30,10 +31,9 @@ class CourseService
      */
     public function createCourse($data){
 
-        \Log::info($data);
         $course = new Course();
         $course->fill($data);
         $course->save();
-        return ['status'=> 'ok'];
+        return ['status'=> 'ok', 'id' => $course->id];
     }
 }

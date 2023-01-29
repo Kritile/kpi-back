@@ -26,9 +26,14 @@ class UserService
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function register($cred){
-        $user = new User();
-        $user->fill($cred);
-        $user->save();
-        return response(['token' => $user->createToken('authToken')->plainTextToken]);
+        if(!User::where('email', '=', $cred['email'])->exists()){
+            $user = new User();
+            $user->fill($cred);
+            $user->password = \Hash::make($cred['password']);
+            $user->save();
+            return response(['token' => $user->createToken('authToken')->plainTextToken]);
+        }
+        return response( 'Email already exist',400);
+
     }
 }

@@ -37,6 +37,7 @@ use Orchid\Screen\AsSource;
  * @method static \Illuminate\Database\Eloquent\Builder|Course whereTeacherId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Course whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \App\Models\Lesson|null $lessons
  */
 class Course extends Model
 {
@@ -54,5 +55,10 @@ class Course extends Model
     public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function lessons()
+    {
+        return $this->hasMany(Lesson::class);
     }
 }

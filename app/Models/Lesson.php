@@ -51,4 +51,9 @@ class Lesson extends Model
         'name',
         'course_id'
     ];
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
 }
